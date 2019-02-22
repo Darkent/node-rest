@@ -8,7 +8,7 @@ app.get('/usuario', (req,res)=>{
     let salto = Number(req.query.salto) || 0;
     console.log(req.query.salto);
     //FILTRAR CAMPOS A DEVOLVER 
-    Usuario.find({estado:false},'nombre email role')
+    Usuario.find({},'nombre email role')
     .skip(salto)
     .limit(cnt)
     .exec((err,data)=>{
