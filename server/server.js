@@ -1,28 +1,20 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
+
+
 const bodyParser= require('body-parser');
-require('../config/config');
+
+require('./config/config');
 
 app.use(bodyParser.urlencoded({extended:false}));
 
-app.get('/usuario', (req,res)=>{
 
-    res.json('get usuario')
-});
-app.post('/usuario', (req,res)=>{
-    let persona =req.body
+app.use(require('./routes/usuario'))
 
-    res.json({persona})
+mongoose.connect(process.env.urlBD,(err)=>{
+    if(!err) console.log('DB conectada');
 });
-app.put('/usuario/:id', (req,res)=>{
-    let id = req.params.id
-    res.json({id})
-});
-app.delete('/usuario', (req,res)=>{
-
-    res.json('delete usuario')
-});
-
 
 app.listen(process.env.PORT, ()=> {
     console.log('Servidor corriendo');
