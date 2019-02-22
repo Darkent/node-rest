@@ -15,7 +15,7 @@ if(process.env.NODE_ENV === 'dev'){
         uri = 'mongodb://localhost/cafe';
 }
 else{
-        uri = 'mongodb+srv://Darkent:0sXZErwGritLLCH9@cluster0-az1b1.mongodb.net/test?retryWrites=true';
+        uri = process.env.MONGOURI;
 }
 
 process.env.urlBD = uri;
