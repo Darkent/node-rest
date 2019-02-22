@@ -3,10 +3,17 @@ const app = express();
 const bcrypt = require('bcrypt'); 
 const Usuario = require('../models/usuarios');
 const _ = require('underscore');
+
+app.get('/',(req,res)=>{
+    res.json({
+        Hola:"Xd"
+    })
+})
+
 app.get('/usuario', (req,res)=>{
     let cnt = Number(req.query.limite) || 0;
     let salto = Number(req.query.salto) || 0;
-    console.log(req.query.salto);
+   
     //FILTRAR CAMPOS A DEVOLVER 
     Usuario.find({},'nombre email role')
     .skip(salto)
