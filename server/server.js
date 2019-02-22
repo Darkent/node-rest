@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(require('./routes/usuario'))
 
-mongoose.connect('mongodb+srv://Darkent:0sXZErwGritLLCH9@cluster0-az1b1.mongodb.net/test?retryWrites=true',(err)=>{
+mongoose.connect(process.env.urlBD ,(err)=>{
     if(!err) console.log('DB conectada');
 });
 
