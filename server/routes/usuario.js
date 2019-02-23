@@ -3,6 +3,7 @@ const app = express();
 const bcrypt = require('bcrypt'); 
 const Usuario = require('../models/usuarios');
 const _ = require('underscore');
+const {autenticaToken, revisaRole} = require('../middlewares/autenticacion');
 
 app.get('/',(req,res)=>{
     res.json({
@@ -10,7 +11,7 @@ app.get('/',(req,res)=>{
     })
 })
 
-app.get('/usuario', (req,res)=>{
+app.get('/usuario',[autenticaToken], (req,res)=>{
     let cnt = Number(req.query.limite) || 0;
     let salto = Number(req.query.salto) || 0;
    
@@ -43,7 +44,7 @@ app.get('/usuario', (req,res)=>{
 });
 
 
-app.post('/usuario', (req,res)=>{
+app.post('/usuario',[autenticaToken,revisaRole], (req,res)=>{
 
 
     let usuario = new Usuario({
@@ -72,7 +73,7 @@ app.post('/usuario', (req,res)=>{
    
   
 });
-app.put('/usuario/:id', (req,res)=>{
+app.put('/usuario/:id',[autenticaToken,revisaRole],(req,res)=>{
     let id = req.params.id
     //FILTRAR CAMPOS QUE SE CONVERSEN EN EL OBJETO ELIMINANDO LOS DEMAS QUE NO APAREZCAN
     let body = _.pick(req.body,['nombre','email','role','estado']);
@@ -92,7 +93,7 @@ app.put('/usuario/:id', (req,res)=>{
     })
    
 });
-app.delete('/usuario/:id', (req,res)=>{
+app.delete('/usuario/:id',[autenticaToken,revisaRole],(req,res)=>{
     let id = req.params.id
     console.log(id);
     

@@ -10,7 +10,7 @@ require('./config/config');
 app.use(bodyParser.urlencoded({extended:false}));
 
 
-app.use(require('./routes/usuario'))
+app.use(require('./routes/index'))
 
 mongoose.connect(process.env.urlBD ,(err)=>{
     if(!err) console.log('DB conectada');
