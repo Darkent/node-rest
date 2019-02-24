@@ -5,12 +5,6 @@ const Usuario = require('../models/usuarios');
 const _ = require('underscore');
 const {autenticaToken, revisaRole} = require('../middlewares/autenticacion');
 
-app.get('/',(req,res)=>{
-    res.json({
-        Hola:"Xd"
-    })
-})
-
 app.get('/usuario',[autenticaToken], (req,res)=>{
     let cnt = Number(req.query.limite) || 0;
     let salto = Number(req.query.salto) || 0;
@@ -95,7 +89,7 @@ app.put('/usuario/:id',[autenticaToken,revisaRole],(req,res)=>{
 });
 app.delete('/usuario/:id',[autenticaToken,revisaRole],(req,res)=>{
     let id = req.params.id
-    console.log(id);
+   
     
     Usuario.findByIdAndUpdate(id,{estado:false},{new:true},(err,data)=>{
         if(err){

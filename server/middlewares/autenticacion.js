@@ -3,13 +3,16 @@ const jwt = require('jsonwebtoken');
 
 let autenticaToken = (req,res,next)=>{
     let token = req.get('token');
-
+    
     jwt.verify(token,process.env.SEED,(err,decoded)=>{
         if(err)
          return res.status(500).json({
             ok:false,
-            err
+            er :{
+                message:err
+            }
         });
+        
 
         if(!decoded)
         return res.status(500).json({
@@ -18,7 +21,7 @@ let autenticaToken = (req,res,next)=>{
         });
 
         req.usuario = decoded.data;
-        console.log(decoded.data + " toke");
+       
         next();
     })
 }
