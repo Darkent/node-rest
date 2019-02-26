@@ -35,6 +35,7 @@ app.put('/upload/:tipo/:id', (req, res) => {
     }
     let nombre = `${id}-${new Date().getMilliseconds() }-${archivo.name.replace(/ /g,"-")}`
     archivo.mv(`uploads/${tipo}/${nombre}`, (err) => {
+        
         if (err)
             return res.status(500).json(err);
 
